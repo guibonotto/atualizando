@@ -38,6 +38,27 @@ if ($btnLogin) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kallto Agrosolutions</title>
     <link rel="stylesheet" href="css/login.css">
+    <script>
+        function validarFormulario() {
+            var email = document.forms["loginForm"]["usuario"].value;
+            var senha = document.forms["loginForm"]["senha"].value;
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var senhaRegex = /^[a-zA-Z0-9]{6,}$/;
+
+            if (!emailRegex.test(email)) {
+                alert("Por favor, insira um endereço de e-mail válido.");
+                return false;
+            }
+
+            if (!senhaRegex.test(senha)) {
+                alert("A senha deve conter pelo menos 6 caracteres alfanuméricos.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 
 <body>
