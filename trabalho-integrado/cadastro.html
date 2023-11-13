@@ -20,6 +20,15 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .seta {
+        position: absolute;
+        margin-top: -70px;
+    }
+    
+    .seta a {
+        text-decoration: none;
+        color: yellow;
+    }
         h2{
             text-align: center;
         }
@@ -44,11 +53,28 @@
             cursor: pointer;
             border-radius: 4px;
         }
+        h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    font-size: 14px;
+    color:yellow;
+    margin-top: 20px;
+    font-weight: bold;
+
+}
     </style>
 </head>
 <body>
     <form action="processar_formulario.php" method="post">
         <h2>Cadastre-se na Kalltto Agrosolutions</h2>
+        <div class="seta">
+            <a href="#" onclick="voltarPagina()">Voltar</a>
+        </div>
 
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
@@ -113,6 +139,9 @@
         </select>
 
         <input type="submit" value="Enviar">
+        <h3>Já possui um cadastro?</h3>
+        <a href="login.php"><input type="submit" value="CLIQUE AQUI"></a>
+    
     </form>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -185,5 +214,6 @@
             });
         });
     </script>
+
 </body>
 </html>
