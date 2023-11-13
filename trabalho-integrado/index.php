@@ -46,26 +46,69 @@
             <h2>Conheça a Solução Tech para sua fazenda<br> Entre em Contato conosco!</h2>
             <img src="img//logo.png" width="450px" height="450px" margin-left="80px">
         </div>
-        <form action="processar_cadastro.php" method="post">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required><br><br>
+        <form id="meuFormulario" action="cadlog_usuarioo/processar_cadastro.php" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+"><br><br>
 
-            <label for="numero">Telefone</label>
-            <input type="number" id="telefone" name="telefone" required><br><br>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required pattern="[0-9]+"><br><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required><br><br>
+        <label for="senha">Senha (pelo menos 8 caracteres, incluindo letras e números):</label>
+        <input type="password" id="senha" name="senha" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required><br><br>
 
-            <label for="problema">Digite sua necessidade:</label>
-            <input type="text" id="problema" name="problema" required><br><br>
+        <label for="problema">Digite sua necessidade:</label>
+        <input type="text" id="problema" name="problema" required><br><br>
 
-            <input type="submit" value="Cadastrar" id="cadastrarbotao">
-        </form>
-            </div>
-        </main>
+        <input type="submit" value="Cadastrar" id="cadastrarbotao">
+    </form>
+
+    <script>
+        document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+            if (!validarFormulario()) {
+                event.preventDefault(); // Impede o envio do formulário se a validação falhar
+            }
+        });
+
+        function validarFormulario() {
+            var nome = document.getElementById('nome').value;
+            var telefone = document.getElementById('telefone').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('senha').value;
+            var problema = document.getElementById('problema').value;
+
+            var nomeRegex = /[A-Za-zÀ-ÖØ-öø-ÿ\s]+/;
+            var telefoneRegex = /^[0-9]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            if (!nomeRegex.test(nome)) {
+                alert('Nome inválido');
+                return false;
+            }
+
+            if (!telefoneRegex.test(telefone)) {
+                alert('Telefone inválido');
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert('Email inválido');
+                return false;
+            }
+
+            if (!senhaRegex.test(senha)) {
+                alert('Senha inválida. Deve conter pelo menos 8 caracteres, incluindo letras e números.');
+                return false;
+            }
+
+            // Adicione aqui mais validações conforme necessário
+
+            return true; // Retorne true se a validação for bem-sucedida
+        }
+        </script>
         <footer>
                 <p> &copy; Kallto AgroSolutions 2023<br> Todos os direitos reservados.</p>
         </footer>
