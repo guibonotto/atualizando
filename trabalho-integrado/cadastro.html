@@ -1,102 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <title>Cadastre-se já</title>
-    <link rel="stylesheet" type="text/css" href="css/cadlog.css">
     <meta charset="utf-8">
     <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: yellowgreen;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2{
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Cadastro</h2>
-        <form id="cadastroForm" action="processar_cadastro.php" method="post">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <div id="nomeError" class="error-message"></div>
+    <form action="processar_formulario.php" method="post">
+        <h2>Cadastre-se na Kalltto Agrosolutions</h2>
 
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" required>
-            <div id="telefoneError" class="error-message"></div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <div id="emailError" class="error-message"></div>
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+        </select>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
-            <div id="senhaError" class="error-message"></div>
+        <label for="nascimento">Data de Nascimento:</label>
+        <input type="date" id="nascimento" name="nascimento" required>
 
-            <label for="problema">Digite sua necessidade:</label>
-            <input type="text" id="problema" name="problema" required>
-            <div id="problemaError" class="error-message"></div>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required>
 
-            <input type="submit" value="Cadastrar" id="cadastrarbotao">
-        </form>
-    </main>
-    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
+
+        <label for="senha">Senha: (A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter no mínimo 8 caracteres.)</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <label for="cargo">Cargo:</label>
+        <select id="cargo" name="cargo" required>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado" required>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+
+        <input type="submit" value="Enviar">
+    </form>
     <script>
-        const form = document.getElementById('cadastroForm');
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            validateForm();
+            form.addEventListener('submit', function (event) {
+                const nomeRegex = /^[a-zA-Z\s]{3,}$/;
+                const nomeInput = form.querySelector('#nome');
+                if (!nomeRegex.test(nomeInput.value)) {
+                    alert('Por favor, insira um nome válido.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const sexoRegex = /^(masculino|feminino|outro)$/;
+                const sexoInput = form.querySelector('#sexo');
+                if (!sexoRegex.test(sexoInput.value)) {
+                    alert('Por favor, selecione um sexo válido.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const nascimentoRegex = /^\d{4}-\d{2}-\d{2}$/;
+                const nascimentoInput = form.querySelector('#nascimento');
+                if (!nascimentoRegex.test(nascimentoInput.value)) {
+                    alert('Por favor, insira uma data de nascimento válida.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const telefoneRegex = /^\d{10,15}$/;
+                const telefoneInput = form.querySelector('#telefone');
+                if (!telefoneRegex.test(telefoneInput.value)) {
+                    alert('Por favor, insira um número de telefone válido.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                const emailInput = form.querySelector('#email');
+                if (!emailRegex.test(emailInput.value)) {
+                    alert('Por favor, insira um endereço de email válido.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const loginRegex = /^[a-zA-Z0-9._-]{3,}$/;
+                const loginInput = form.querySelector('#login');
+                if (!loginRegex.test(loginInput.value)) {
+                    alert('Por favor, insira um login válido.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                const senhaInput = form.querySelector('#senha');
+                if (!senhaRegex.test(senhaInput.value)) {
+                    alert('A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter no mínimo 8 caracteres.');
+                    event.preventDefault();
+                    return;
+                }
+
+                const cargoInput = form.querySelector('#cargo');
+                const estadoInput = form.querySelector('#estado');
+                if (cargoInput.value === '' || estadoInput.value === '') {
+                    alert('Por favor, selecione uma opção para Cargo e Estado.');
+                    event.preventDefault();
+                    return;
+                }
+            });
         });
-
-        function validateForm() {
-            // Limpar mensagens de erro
-            clearErrorMessages();
-
-            // Obter valores dos campos
-            const nome = document.getElementById('nome').value;
-            const telefone = document.getElementById('telefone').value;
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
-            const problema = document.getElementById('problema').value;
-
-            // Expressões regulares para validação
-            const nomeRegex = /^[a-zA-Z\s]+$/;
-            const telefoneRegex = /^\d{10,}$/;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-
-            // Validar Nome
-            if (!nomeRegex.test(nome)) {
-                displayErrorMessage('nomeError', 'Nome inválido. Utilize apenas letras e espaços.');
-            }
-
-            // Validar Telefone
-            if (!telefoneRegex.test(telefone)) {
-                displayErrorMessage('telefoneError', 'Telefone inválido. Utilize no mínimo 10 dígitos numéricos.');
-            }
-
-            // Validar Email
-            if (!emailRegex.test(email)) {
-                displayErrorMessage('emailError', 'Email inválido. Certifique-se de inserir um email válido.');
-            }
-
-            // Validar Senha
-            if (!senhaRegex.test(senha)) {
-                displayErrorMessage('senhaError', 'Senha inválida. Utilize pelo menos 8 caracteres, incluindo maiúsculas, minúsculas e números.');
-            }
-
-            // Validar Necessidade
-            if (problema.trim() === '') {
-                displayErrorMessage('problemaError', 'Por favor, descreva sua necessidade.');
-            }
-        }
-
-        function displayErrorMessage(id, message) {
-            const errorElement = document.getElementById(id);
-            errorElement.innerText = message;
-        }
-
-        function clearErrorMessages() {
-            const errorMessages = document.querySelectorAll('.error-message');
-            errorMessages.forEach(message => message.innerText = '');
-        }
     </script>
-        <h3>Já possui um cadastro?</h3>
-        <a href="login.php">CLIQUE AQUI</a>
-    </div>
 </body>
 </html>
